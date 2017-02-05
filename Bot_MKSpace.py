@@ -17,35 +17,45 @@ def handle(msg):
 	print(chat_id, content_type, chat_type)
 	
 	response = bot.getUpdates()
-	print "response:"
-	pprint(response)
 	print "msg:"
 	pprint(msg)
 	if Statomacchina == 0:
 		if command_input == '/risolvi' or command_input == '/risolvi@CompitatorBot':
-			risolvi_str = "Illustrami l'addizione che vorresti risolvere"
+			risolvi_str = "Illustrami l'operazione che vorresti risolvere (attualmente disponibili sottrazione ed addizione)"
 			bot.sendMessage(chat_id, risolvi_str)
 			Statomacchina = 1
 		else:
 			bot.sendMessage(chat_id, "Non mi conosci, puoi chiedermi soltanto /risolvi")
 		
 	elif Statomacchina == 1:
-		check = string.find(command_input, '+')
-		if check == -1:
-			risposta = "Stai cercando di fregarmi, maledetto!"
-		else:
+	
+		#addizione
+		if string.find(command_input, '+')=! -1
 				a, b = command_input.split('+')
 
 				try:
 					a1 = int(a.split()[0])
-                        		b1 = int(b.split()[0])
+                    b1 = int(b.split()[0])
 					c = a1 + b1
 					risposta = ("L addizione tra i due numeri e: %s" % c)
 
 				except ValueError:
 					risposta = ("Sei un cretino! che razza di numeri sarebbero questi?!")
+		
+		#sottrazione
+		elif string.find(command_input, '-')=! -1
+				a, b = command_input.split('-')
 
+				try:
+					a1 = int(a.split()[0])
+                    b1 = int(b.split()[0])
+					c = a1 - b1
+					risposta = ("La sottrzione tra i due numeri e: %s" % c)
 
+				except ValueError:
+					risposta = ("Sei un cretino! che razza di numeri sarebbero questi?!")
+
+		else bot.sendMessage(chat_id, "ti ho chiesto di propormi una sottrazione od una addizione scemo")
 			
 		Statomacchina = 0
 		bot.sendMessage(chat_id, risposta)
