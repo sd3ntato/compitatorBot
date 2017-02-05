@@ -16,6 +16,11 @@ def handle(msg):
 	
 	print(chat_id, content_type, chat_type)
 	
+	response = bot.getUpdates()
+	print "response:"
+	pprint(response)
+	print "msg:"
+	pprint(msg)
 	if Statomacchina == 0:
 		if command_input == '/risolvi' or command_input == '/risolvi@CompitatorBot':
 			risolvi_str = "Illustrami l'addizione che vorresti risolvere"
@@ -29,16 +34,19 @@ def handle(msg):
 		if check == -1:
 			risposta = "Stai cercando di fregarmi, maledetto!"
 		else:
-			a, b = command_input.split('+')
-			a1 = int(a.split()[0])
-			b1 = int(b.split()[0])
-			#if a1.isdigit() and  b1.isdigit():
-			a1 = int(a1)
-			b1 = int(b1)
-			c = a1 + b1
-			risposta = ("L addizione tra i due numeri e: %s" % c)
-			#else:
-				#risposta = ("Sei un cretino! %s %s" %a1  %b1) 
+				a, b = command_input.split('+')
+
+				try:
+					a1 = int(a.split()[0])
+                        		b1 = int(b.split()[0])
+					c = a1 + b1
+					risposta = ("L addizione tra i due numeri e: %s" % c)
+
+				except ValueError:
+					risposta = ("Sei un cretino! che razza di numeri sarebbero questi?!")
+
+
+			
 		Statomacchina = 0
 		bot.sendMessage(chat_id, risposta)
 		
