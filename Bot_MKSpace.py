@@ -30,32 +30,40 @@ def handle(msg):
 	elif Statomacchina == 1:
 	
 		#addizione
-		if string.find(command_input, '+')=! -1
+		check = string.find(command_input, '+')
+		if check == -1 :
+				ver1 = false
+		else :
 				a, b = command_input.split('+')
-
+				
 				try:
 					a1 = int(a.split()[0])
-                    b1 = int(b.split()[0])
+                    			b1 = int(b.split()[0])
 					c = a1 + b1
 					risposta = ("L addizione tra i due numeri e: %s" % c)
 
 				except ValueError:
-					risposta = ("Sei un cretino! che razza di numeri sarebbero questi?!")
+					risposta = ("Sei un cretino! che razza di numeri sarebbero questi?!")		
 		
 		#sottrazione
-		elif string.find(command_input, '-')=! -1
+		check =string.find(command_input, '-') 
+		if check == -1:
+				ver2 = false
+
+		else :
 				a, b = command_input.split('-')
 
 				try:
 					a1 = int(a.split()[0])
-                    b1 = int(b.split()[0])
+                   			b1 = int(b.split()[0])
 					c = a1 - b1
 					risposta = ("La sottrzione tra i due numeri e: %s" % c)
 
 				except ValueError:
 					risposta = ("Sei un cretino! che razza di numeri sarebbero questi?!")
 
-		else bot.sendMessage(chat_id, "ti ho chiesto di propormi una sottrazione od una addizione scemo")
+		if ver1== false and ver2 == false :
+			bot.sendMessage(chat_id, "ti ho chiesto di propormi una sottrazione od una addizione scemo")
 			
 		Statomacchina = 0
 		bot.sendMessage(chat_id, risposta)
