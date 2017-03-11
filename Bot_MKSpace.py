@@ -5,7 +5,7 @@ import re
 from pprint import pprint
 
 Statomacchina = 0
-ver1 = True
+ver1 = 0
 
 def handle(msg):
 	content_type, chat_type, chat_id = telepot.glance(msg)
@@ -35,7 +35,7 @@ def handle(msg):
 		#addizione
 		check = string.find(command_input, '+')
 		if check == -1 :
-				ver1 = False
+				ver1 = 1
 		else :
 				a, b = command_input.split('+')
 
@@ -51,7 +51,7 @@ def handle(msg):
 		#sottrazione
 		check =string.find(command_input, '-')
 		if check == -1:
-				ver1 = False
+				ver1 = 1
 
 		else :
 				a, b = command_input.split('-')
@@ -67,7 +67,7 @@ def handle(msg):
 		#moltiplicazione
 		check =string.find(command_input, '*')
 		if check == -1:
-				ver1 = False
+				ver1 = 1
 
 		else :
 				a, b = command_input.split('*')
@@ -83,14 +83,14 @@ def handle(msg):
 		#divisione
 		check =string.find(command_input, '/')
 		if check == -1:
-				ver1 = False
+				ver1 = 1
 
 		else :
 				a, b = command_input.split('/')
 
 				try:
-					a1 = int(a.split()[0])
-                   			b1 = int(b.split()[0])
+					a1 = float(a.split()[0])
+                   			b1 = float(b.split()[0])
 					c = a1 / b1
 					risposta = ("il rapporto tra i due numeri e: %s" % c)
 
@@ -100,8 +100,9 @@ def handle(msg):
 
 
 
-		if ver1 == True:
-			bot.sendMessage(chat_id, "ti ho chiesto di propormi un' operazione scemo")
+		if ver1 == 0:
+			risposta= "ti ho chiesto di propormi un' operazione scemo"
+			
 
 		Statomacchina = 0
 		bot.sendMessage(chat_id, risposta)
