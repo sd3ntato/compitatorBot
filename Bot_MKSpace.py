@@ -108,7 +108,7 @@ def handle(msg):
 		bot.sendMessage(chat_id, risposta)
 
 
-bot = telepot.Bot('309693128:AAH4TGkBXegyVLykKklS9P44emEgv56K9BM')
+bot = telepot.Bot('***	INSERT TOKEN HERE   ***')
 
 bot.message_loop(handle)
 
