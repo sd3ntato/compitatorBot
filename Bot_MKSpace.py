@@ -5,14 +5,54 @@ import re
 from pprint import pprint
 
 Statomacchina = 0
-ver1 = 0
+
+
+def operazione(a,b,op):
+
+	if op == 1:
+		try:
+			a1 = int(a.split()[0])
+			b1 = int(b.split()[0])
+			c = a1 + b1
+			risposta = ("L addizione tra i due numeri e: %s" % c)
+
+		except ValueError:
+			risposta = ("Sei un cretino! che razza di numeri sarebbero questi?!")
+	elif op == 2:
+		try:
+			a1 = int(a.split()[0])
+			b1 = int(b.split()[0])
+			c = a1 - b1
+			risposta = ("L addizione tra i due numeri e: %s" % c)
+
+		except ValueError:
+			risposta = ("Sei un cretino! che razza di numeri sarebbero questi?!")
+	elif op == 3:
+		try:
+			a1 = int(a.split()[0])
+			b1 = int(b.split()[0])
+			c = a1 * b1
+			risposta = ("L addizione tra i due numeri e: %s" % c)
+
+		except ValueError:
+			risposta = ("Sei un cretino! che razza di numeri sarebbero questi?!")
+	elif op == 4:
+		try:
+			a1 = float(a.split()[0])
+			b1 = float(b.split()[0])
+			c = a1 / b1
+			risposta = ("L addizione tra i due numeri e: %s" % c)
+
+		except ValueError:
+			risposta = ("Sei un cretino! che razza di numeri sarebbero questi?!")
+	return risposta
 
 def handle(msg):
 	content_type, chat_type, chat_id = telepot.glance(msg)
 
 	global Statomacchina
-	global ver1
-	
+	ver1 = 0
+
 
 	chat_id = msg['chat']['id']
 	command_input = msg['text']
@@ -33,82 +73,55 @@ def handle(msg):
 	elif Statomacchina == 1:
 
 		#addizione
-		check = string.find(command_input, '+')
+		check = command_input.find('+')
 		if check == -1 :
-				ver1 = 1
+				ver1 = -1
 		else :
+				ver1 = 1
 				a, b = command_input.split('+')
+				risposta=operazione(a,b,ver1)
 
-				try:
-					a1 = int(a.split()[0])
-                    			b1 = int(b.split()[0])
-					c = a1 + b1
-					risposta = ("L addizione tra i due numeri e: %s" % c)
-
-				except ValueError:
-					risposta = ("Sei un cretino! che razza di numeri sarebbero questi?!")
 
 		#sottrazione
-		check =string.find(command_input, '-')
+		check = command_input.find('-')
 		if check == -1:
-				ver1 = 1
+				ver1 = -1
 
 		else :
-				a, b = command_input.split('-')
+				ver1 = 2
+				a, b = command_input.split('+')
+				risposta=operazione(a,b,ver1)
 
-				try:
-					a1 = int(a.split()[0])
-                   			b1 = int(b.split()[0])
-					c = a1 - b1
-					risposta = ("La sottrzione tra i due numeri e: %s" % c)
-
-				except ValueError:
-					risposta = ("Sei un cretino! che razza di numeri sarebbero questi?!")
 		#moltiplicazione
-		check =string.find(command_input, '*')
+		check = command_input.find('*')
 		if check == -1:
-				ver1 = 1
+				ver1 = -1
 
 		else :
-				a, b = command_input.split('*')
-
-				try:
-					a1 = int(a.split()[0])
-                   			b1 = int(b.split()[0])
-					c = a1 * b1
-					risposta = ("il prodotto tra i due numeri e: %s" % c)
-
-				except ValueError:
-					risposta = ("Sei un cretino! che razza di numeri sarebbero questi?!")
+				ver1 = 3
+				a, b = command_input.split('+')
+				risposta=operazione(a,b,ver1)
 		#divisione
-		check =string.find(command_input, '/')
+		check = command_input.find('/')
 		if check == -1:
-				ver1 = 1
+				ver1 = -1
 
 		else :
-				a, b = command_input.split('/')
-
-				try:
-					a1 = float(a.split()[0])
-                   			b1 = float(b.split()[0])
-					c = a1 / b1
-					risposta = ("il rapporto tra i due numeri e: %s" % c)
-
-				except ValueError:
-					risposta = ("Sei un cretino! che razza di numeri sarebbero questi?!")
+				ver1 = 4
+				a, b = command_input.split('+')
+				risposta=operazione(a,b,ver1)
 
 
 
-
-		if ver1 == 0:
+		if ver1 == -1:
 			risposta= "ti ho chiesto di propormi un' operazione scemo"
-			
+
 
 		Statomacchina = 0
 		bot.sendMessage(chat_id, risposta)
 
 
-bot = telepot.Bot('***	INSERT TOKEN HERE   ***')
+bot = telepot.Bot('token')
 
 bot.message_loop(handle)
 
