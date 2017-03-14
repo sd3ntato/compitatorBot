@@ -74,9 +74,7 @@ def handle(msg):
 
 		#addizione
 		check = command_input.find('+')
-		if check == -1 :
-				ver1 = -1
-		else :
+		if check != -1 :
 				ver1 = 1
 				a, b = command_input.split('+')
 				risposta=operazione(a,b,ver1)
@@ -84,36 +82,28 @@ def handle(msg):
 
 		#sottrazione
 		check = command_input.find('-')
-		if check == -1:
-				ver1 = -1
-
-		else :
+		if check != -1:
 				ver1 = 2
-				a, b = command_input.split('+')
+				a, b = command_input.split('-')
 				risposta=operazione(a,b,ver1)
 
 		#moltiplicazione
 		check = command_input.find('*')
-		if check == -1:
-				ver1 = -1
-
-		else :
+		if check != -1:
 				ver1 = 3
-				a, b = command_input.split('+')
+				a, b = command_input.split('*')
 				risposta=operazione(a,b,ver1)
 		#divisione
 		check = command_input.find('/')
-		if check == -1:
-				ver1 = -1
+		if check != -1:
 
-		else :
 				ver1 = 4
-				a, b = command_input.split('+')
+				a, b = command_input.split('/')
 				risposta=operazione(a,b,ver1)
 
 
 
-		if ver1 == -1:
+		if ver1 == 0:
 			risposta= "ti ho chiesto di propormi un' operazione scemo"
 
 
